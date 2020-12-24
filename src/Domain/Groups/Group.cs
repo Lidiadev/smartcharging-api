@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Groups
@@ -14,7 +15,7 @@ namespace Domain.Groups
         public Group(string name, Ampere capacity)
         {
             Name = name;
-            Capacity = capacity;
+            Capacity = capacity ?? throw new ArgumentNullException(nameof(capacity));
 
             _currentCapacity = Ampere.Default;
         }

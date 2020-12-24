@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Groups
@@ -11,6 +12,9 @@ namespace Domain.Groups
 
         public ChargeStation(string name, Connector connector)
         {
+            if(connector == null)
+                throw new ArgumentNullException(nameof(connector));
+
             Name = name;
             Connectors.Add(connector);
             SumMaxCurrent = connector.MaxCurrent;
