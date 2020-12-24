@@ -1,5 +1,7 @@
 ﻿using Application.Common.Interfaces;
+using Domain.Groups;
 using Infrastructure.Persistence;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,8 @@ namespace Infrastructure
                     builder => builder.MigrationsAssembly(typeof(SmartChargingDbContext).Assembly.FullName)));
 
             services.AddScoped<ISmartChargingDbContext>(provider => provider.GetService<SmartChargingDbContext>());
+
+            services.AddScoped<IGroupRepository, GroupRepository>();
 
             return services;
         }
