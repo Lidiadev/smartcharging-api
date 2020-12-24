@@ -16,10 +16,15 @@ namespace Domain
             SumMaxCurrent = connector.MaxCurrent;
         }
 
-        public void AddConnector(Connector connector)
+        public bool AddConnector(Connector connector)
         {
+            if (Connectors.Count >= Constants.MaxConnectors)
+                return false;
+
             Connectors.Add(connector);
             SumMaxCurrent += connector.MaxCurrent;
+
+            return false;
         }
     }
 }
