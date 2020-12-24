@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Domain
 {
-    public class Group : Entity
+    public class Group : Entity, IAggregateRoot
     {
         public string Name { get; set; }
         public Ampere Capacity { get; set; }
