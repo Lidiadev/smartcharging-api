@@ -33,5 +33,10 @@ namespace Domain
         {
             return Value.GetHashCode();
         }
+
+        public static Ampere operator +(Ampere value1, Ampere value2)
+        {
+            return new Ampere(value1.Value + value2.Value);
+        }
     }
 }
