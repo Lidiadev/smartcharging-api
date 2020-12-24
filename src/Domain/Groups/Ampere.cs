@@ -5,6 +5,7 @@ namespace Domain.Groups
 {
     public class Ampere : ValueObject<Ampere>
     {
+        public static readonly Ampere Default = new Ampere(0);
         public int Value { get; private set; }
 
         protected Ampere()

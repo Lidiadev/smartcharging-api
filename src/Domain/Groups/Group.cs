@@ -9,12 +9,14 @@ namespace Domain.Groups
         public Ampere Capacity { get; set; }
         public IList<ChargeStation> ChargeStations { get; private set; }
 
-        private Ampere _currentCapacity;
+        private readonly Ampere _currentCapacity;
 
         public Group(string name, Ampere capacity)
         {
             Name = name;
             Capacity = capacity;
+
+            _currentCapacity = Ampere.Default;
         }
 
         public bool AddChargeStation(ChargeStation station)
