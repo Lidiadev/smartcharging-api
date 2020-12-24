@@ -1,6 +1,8 @@
 ﻿using Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Domain.Groups
 {
@@ -8,7 +10,17 @@ namespace Domain.Groups
     {
         public string Name { get; set; }
         public IList<Connector> Connectors { get; private set; }
+
+        private readonly IList<Connector> _connectors;
+        public virtual IReadOnlyCollection<Connector> Connector => _connectors.ToList();
+
+        [NotMapped]
         public Ampere SumMaxCurrent { get; private set; }
+
+        protected ChargeStation()
+        {
+            _connectors = new List<Connector>();
+        }
 
         public ChargeStation(string name, Connector connector)
         {
@@ -16,16 +28,16 @@ namespace Domain.Groups
                 throw new ArgumentNullException(nameof(connector));
 
             Name = name;
-            Connectors.Add(connector);
+            _connectors.Add(connector);
             SumMaxCurrent = connector.MaxCurrent;
         }
 
         public bool AddConnector(Connector connector)
         {
-            if (Connectors.Count >= Constants.MaxConnectors)
+            if (_connectors.Count >= Constants.MaxConnectors)
                 return false;
 
-            Connectors.Add(connector);
+            _connectors.Add(connector);
             SumMaxCurrent += connector.MaxCurrent;
 
             return false;

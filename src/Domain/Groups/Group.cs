@@ -1,6 +1,7 @@
 ﻿using Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Groups
 {
@@ -8,9 +9,16 @@ namespace Domain.Groups
     {
         public string Name { get; set; }
         public Ampere Capacity { get; set; }
-        public IList<ChargeStation> ChargeStations { get; private set; }
+
+        private readonly IList<ChargeStation> _chargeStations;
+        public virtual IReadOnlyCollection<ChargeStation> ChargeStations => _chargeStations.ToList();
 
         private readonly Ampere _currentCapacity;
+
+        protected Group()
+        {
+            _chargeStations = new List<ChargeStation>();
+        }
 
         public Group(string name, Ampere capacity)
         {
@@ -25,7 +33,7 @@ namespace Domain.Groups
             if (_currentCapacity + station.SumMaxCurrent > Capacity)
                 return false;
 
-            ChargeStations.Add(station);
+            _chargeStations.Add(station);
 
             return true;
         }
