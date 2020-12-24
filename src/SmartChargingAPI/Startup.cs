@@ -31,6 +31,18 @@ namespace SmartChargingAPI
             services.AddApplication();
 
             services.AddControllers();
+
+            // Register the Swagger services
+            services.AddSwaggerDocument(config =>
+            {
+                config.AllowReferencesWithProperties = true;
+                config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "Smart Charging API";
+                    document.Info.Description = ".NET Core REST API for Smart Charging";
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +54,10 @@ namespace SmartChargingAPI
             }
 
             app.UseHttpsRedirection();
+
+            // Register the Swagger generator and the Swagger UI middleware
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
