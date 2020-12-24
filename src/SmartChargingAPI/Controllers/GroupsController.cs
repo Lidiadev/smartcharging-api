@@ -15,6 +15,7 @@ namespace SmartChargingAPI.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        [HttpPost]
         public async Task<ActionResult<long>> Create(CreateGroupCommand command)
         {
             var id = await Mediator.Send(command);
