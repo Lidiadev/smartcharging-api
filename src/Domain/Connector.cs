@@ -4,6 +4,6 @@ namespace Domain
 {
     public class Connector : Entity
     {
-        public int MaxCurrentInAmps { get; set; }
+        public Ampere MaxCurrent { get; set; }
     }
 }
