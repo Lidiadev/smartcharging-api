@@ -1,7 +1,7 @@
 ﻿using Domain.Common;
 using System;
 
-namespace Domain
+namespace Domain.Groups
 {
     public class Ampere : ValueObject<Ampere>
     {

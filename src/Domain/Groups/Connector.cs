@@ -1,6 +1,6 @@
 ﻿using Domain.Common;
 
-namespace Domain
+namespace Domain.Groups
 {
     public class Connector : Entity
     {

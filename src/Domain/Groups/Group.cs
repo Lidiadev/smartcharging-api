@@ -1,7 +1,7 @@
 ﻿using Domain.Common;
 using System.Collections.Generic;
 
-namespace Domain
+namespace Domain.Groups
 {
     public class Group : Entity, IAggregateRoot
     {
