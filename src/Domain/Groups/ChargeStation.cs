@@ -23,6 +23,7 @@ namespace Domain.Groups
         }
 
         public ChargeStation(string name, Connector connector)
+            : this()
         {
             if(connector == null)
                 throw new ArgumentNullException(nameof(connector));

@@ -20,7 +20,8 @@ namespace Domain.Groups
             _chargeStations = new List<ChargeStation>();
         }
 
-        public Group(string name, Ampere capacity)
+        public Group(string name, Ampere capacity) 
+            : this()
         {
             Name = name;
             Capacity = capacity ?? throw new ArgumentNullException(nameof(capacity));
