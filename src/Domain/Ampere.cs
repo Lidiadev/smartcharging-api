@@ -38,5 +38,15 @@ namespace Domain
         {
             return new Ampere(value1.Value + value2.Value);
         }
+
+        public static bool operator >(Ampere value1, Ampere value2)
+        {
+            return value1.Value > value2.Value;
+        }
+
+        public static bool operator <(Ampere value1, Ampere value2)
+        {
+            return value1.Value < value2.Value;
+        }
     }
 }

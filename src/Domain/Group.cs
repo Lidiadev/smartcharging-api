@@ -7,11 +7,24 @@ namespace Domain
     {
         public string Name { get; set; }
         public Ampere Capacity { get; set; }
-        private IList<ChargeStation> Connectors { get; set; }
+        public IList<ChargeStation> ChargeStations { get; private set; }
 
-        public Group(string name)
+        private Ampere _currentCapacity;
+
+        public Group(string name, Ampere capacity)
         {
             Name = name;
+            Capacity = capacity;
+        }
+
+        public bool AddChargeStation(ChargeStation station)
+        {
+            if (_currentCapacity + station.SumMaxCurrent > Capacity)
+                return false;
+
+            ChargeStations.Add(station);
+
+            return true;
         }
     }
 }
