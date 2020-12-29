@@ -29,8 +29,10 @@ namespace Domain.Groups
             _currentCapacity = Ampere.Default;
         }
 
-        public bool AddChargeStation(ChargeStation station)
+        public bool TryAddChargeStation(string name, IEnumerable<int> maxCurrentAmps)
         {
+            var station = new ChargeStation(name, maxCurrentAmps.ToList());
+
             if (_currentCapacity + station.SumMaxCurrent > Capacity)
                 return false;
 

@@ -22,26 +22,30 @@ namespace Domain.Groups
             _connectors = new List<Connector>();
         }
 
-        public ChargeStation(string name, Connector connector)
+        public ChargeStation(string name, List<int> maxCurrentList)
             : this()
         {
-            if(connector == null)
-                throw new ArgumentNullException(nameof(connector));
+            if (maxCurrentList.Count < 1 || maxCurrentList.Count > Constants.MaxConnectors)
+                throw new Exception("The number of connectors is not valid.");
 
             Name = name;
-            _connectors.Add(connector);
-            SumMaxCurrent = connector.MaxCurrent;
+            SumMaxCurrent = Ampere.Default;
+
+            foreach (var maxCurrent in maxCurrentList)
+            {
+                AddConnector(maxCurrent);
+            }
         }
 
-        public bool AddConnector(Connector connector)
+        public void AddConnector(int maxCurrent)
         {
-            if (_connectors.Count >= Constants.MaxConnectors)
-                return false;
+            Connector connector = new Connector(Ampere.Create(maxCurrent));
 
             _connectors.Add(connector);
             SumMaxCurrent += connector.MaxCurrent;
-
-            return false;
         }
+
+        public bool CanAddConnectors
+            => _connectors.Count < Constants.MaxConnectors;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Groups.CreateGroup;
+using Application.Groups.CreateGroupWithChargeStation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,6 +18,17 @@ namespace SmartChargingAPI.Controllers
 
         [HttpPost]
         public async Task<ActionResult<long>> Create(CreateGroupCommand command)
+        {
+            var id = await Mediator.Send(command);
+
+            _logger.LogInformation($"Group {id} was created.");
+
+            return id;
+        }
+
+        [HttpPost]
+        [Route("withChargeStation")]
+        public async Task<ActionResult<long>> CreateWithChargeStations(CreateGroupWithChargeStationCommand command)
         {
             var id = await Mediator.Send(command);
 

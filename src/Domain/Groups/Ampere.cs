@@ -8,10 +8,6 @@ namespace Domain.Groups
         public static readonly Ampere Default = new Ampere(0);
         public int Value { get; private set; }
 
-        protected Ampere()
-        {
-        }
-
         protected Ampere(int value)
         {
             Value = value;
